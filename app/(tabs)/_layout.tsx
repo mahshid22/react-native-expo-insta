@@ -1,37 +1,32 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Tabs } from 'expo-router'
+import { Foundation, MaterialIcons } from '@expo/vector-icons'
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+    screenOptions={{
+        tabBarShowLabel: false,
         headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
+        lazy: true,
+        
+    }}
+    >
+        <Tabs.Screen name="home" options={{
+            title: "home",
+            tabBarIcon: ({color})=>(
+                <Foundation name="home" size={28} color={color} />
+            )
+        }}/>
+        <Tabs.Screen name="profile" options={{
+            title: "home",
+            tabBarIcon: ({color})=>(
+                <MaterialIcons name="account-circle" size={28} color={color} />
+            )
+        }}/>
     </Tabs>
-  );
+  )
 }
+
+export default TabLayout
