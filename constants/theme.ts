@@ -1,4 +1,4 @@
-export const lightThem = {
+export const lightTheme = {
   colors: {
     background: "white",
     text: "black",
@@ -6,7 +6,7 @@ export const lightThem = {
     accentText: "gray",
   },
 };
-export const darkThem = {
+export const darkTheme = {
   colors: {
     background: "black",
     text: "white",
@@ -15,4 +15,4 @@ export const darkThem = {
   },
 };
 
-export type Theme = typeof lightThem;
+export type Theme = typeof lightTheme;
