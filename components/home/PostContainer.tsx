@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import Posts from "@/constants/posts";
 import PostCard from "./PostCard";
 
-const PostContainer = () => {
+const PostContainer = ({handleOpenPress}:{handleOpenPress: ()=>void}) => {
   const [visibleVideoIndex, setVisibleVideoIndex] = useState<number | null>(
     null,
   );
@@ -28,7 +28,7 @@ const PostContainer = () => {
             item={item}
             index={index}
             visibleVideoIndex={visibleVideoIndex}
-            // handleModal={handleOpenPress}
+            handleModal={handleOpenPress}
           />
         )}
       />

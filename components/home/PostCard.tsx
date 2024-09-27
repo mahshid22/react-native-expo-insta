@@ -7,7 +7,17 @@ import ImageContainer from "./ImageContainer";
 import { router } from "expo-router";
 import VideoContainer from "./VideoContainer";
 
-const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: number, visibleVideoIndex: number| null}) => {
+const PostCard = ({
+  item,
+  index,
+  visibleVideoIndex,
+  handleModal,
+}: {
+  item: PostType;
+  index: number;
+  visibleVideoIndex: number | null;
+  handleModal: any;
+}) => {
   const { theme } = useTheme();
   const { background, text, accent, accentText } = theme.colors;
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -20,7 +30,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
   });
-  const pause = index ===visibleVideoIndex
+  const pause = index === visibleVideoIndex;
   return (
     <View>
       {item.images.length > 0 && (
@@ -34,7 +44,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
             />
             <Text style={{ color: text }}>{item.user.username}</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleModal}>
             <Entypo name="dots-three-vertical" size={18} color={text} />
           </TouchableOpacity>
         </View>
@@ -48,7 +58,12 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
               viewabilityConfig={viewabilityConfig}
             />
           ) : (
-            <VideoContainer items={item} index={index} pause={pause} visibleVideoIndex={visibleVideoIndex} />
+            <VideoContainer
+              items={item}
+              index={index}
+              pause={pause}
+              visibleVideoIndex={visibleVideoIndex}
+            />
           )}
           {item.images.length > 1 && (
             <View
@@ -70,7 +85,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
           )}
         </View>
       </View>
-      <View  style={styles.iconContainer}>
+      <View style={styles.iconContainer}>
         <View
           style={{
             position: "absolute",
@@ -79,7 +94,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
             gap: 4,
           }}
         >
-             {item.images.length > 1 &&
+          {item.images.length > 1 &&
             item.images.map((_, index) => {
               const color = currentSlideIndex === index ? "#00BFFF" : "gray";
               return (
@@ -103,7 +118,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
               <FontAwesome name="heart-o" size={24} color={text} />
             )}
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => router.push("/Comments")}>
+          <TouchableOpacity>
             <FontAwesome6 name="comment" size={24} color={text} />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -124,10 +139,7 @@ const PostCard = ({ item, index , visibleVideoIndex}: { item: PostType; index: n
           <Text style={{ fontWeight: "bold" }}>{item.user.username}</Text>{" "}
           {item.caption}
         </Text>
-        <TouchableOpacity
-          style={{ marginTop: 6 }}
-          onPress={() => router.push("/Comments")}
-        >
+        <TouchableOpacity style={{ marginTop: 6 }}>
           <Text style={{ color: "gray" }}>View all comments</Text>
         </TouchableOpacity>
         <Text style={{ color: "gray", fontSize: 12, marginTop: 2 }}>
@@ -161,7 +173,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginVertical: 12,
   },
-  likeBox:{
+  likeBox: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
