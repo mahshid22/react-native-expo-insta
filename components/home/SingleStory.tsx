@@ -3,13 +3,13 @@ import React from "react";
 import { useTheme } from "@/utils/ThemeContext";
 import { router } from "expo-router";
 
-interface Story {
+interface SingleStory {
   active: boolean;
   imageUrl: string;
   size: number;
   text?: string;
 }
-const SingleStory = ({ active = true, size, imageUrl, text }: Story) => {
+const SingleStory = ({ active = true, size, imageUrl, text }: SingleStory) => {
   const { theme } = useTheme();
   const { background, accent, accentText, text: textColor } = theme.colors;
   const storyColor = active ? "#E3256B" : accent;
